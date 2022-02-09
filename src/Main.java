@@ -39,4 +39,10 @@ public class Main {
 		System.out.println(payment.doPayment()); 
 		
 	}
+	
+	private static void probarBuilder() {
+		/*The Builder pattern allows you to build products step by step. You can defer the execution of certain steps without 
+		decomposing the final product. You can even invoke steps recursively, which is useful when you need to build a tree of objects. */
+		creational.builder.Card card = new creational.builder.Card.CardBuilder("adri","222").expires(2).credit(true).name("fsdf").build();
+	}
 }
