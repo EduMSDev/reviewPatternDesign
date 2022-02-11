@@ -5,14 +5,26 @@ import creational.abstractfactory.PaymentMethod;
 import creational.factorymethod.Payment;
 import creational.factorymethod.PaymentFactory;
 import creational.factorymethod.TypePayment;
+import static creational.prototype.PrototypeFactory.CarType.VISA;
+import static creational.prototype.PrototypeFactory.CarType.AMEX;
+import creational.prototype.PrototypeCard;
+import creational.prototype.PrototypeFactory;
 
 
 public class Main {
 	public static void main(String[] args) {
 		//testingAsbtractFactoryMethod();
-		probarAbstractFactory();
+		//probarAbstractFactory();
+		//probarBuilder();
+		//probarPrototype();
+		probarSinglenton();
+		
 	}
 	
+	private static void probarSinglenton () {
+		creational.singlenton.Card.getInstance().setCardNumber("fdfd");;
+		System.out.println(creational.singlenton.Card.getInstance().getCardNumber());
+	}
 	
 	private static void testingAsbtractFactoryMethod() {
 		/*One of its limitations is that the reserved word new always returns an 
@@ -44,5 +56,19 @@ public class Main {
 		/*The Builder pattern allows you to build products step by step. You can defer the execution of certain steps without 
 		decomposing the final product. You can even invoke steps recursively, which is useful when you need to build a tree of objects. */
 		creational.builder.Card card = new creational.builder.Card.CardBuilder("adri","222").expires(2).credit(true).name("fsdf").build();
+		System.out.println(card);
+	}
+	
+	private static void probarPrototype() {
+		PrototypeFactory.loadCard();
+		try {
+			PrototypeCard visa = PrototypeFactory.getInstance(VISA);
+			visa.getCard();
+			
+			PrototypeCard amex = PrototypeFactory.getInstance(AMEX);
+			amex.getCard();
+		}catch(CloneNotSupportedException e){
+			
+		}
 	}
 }

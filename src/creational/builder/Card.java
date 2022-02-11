@@ -2,6 +2,12 @@ package creational.builder;
 
 public class Card {
 	
+	@Override
+	public String toString() {
+		return "Card [cardType=" + cardType + ", number=" + number + ", name=" + name + ", expires=" + expires
+				+ ", credit=" + credit + "]";
+	}
+
 	private final String cardType;
 	private final String number;
 	private final String name;
