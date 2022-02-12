@@ -8,6 +8,10 @@ import creational.factorymethod.TypePayment;
 import static creational.prototype.PrototypeFactory.CarType.VISA;
 
 import behavioral.chainofresponsibility.Tarjeta;
+import behavioral.command.CreditCard;
+import behavioral.command.CreditCardActivateCommand;
+import behavioral.command.CreditCardDesactivateCommand;
+import behavioral.command.CreditCardInvoker;
 
 import static creational.prototype.PrototypeFactory.CarType.AMEX;
 import creational.prototype.PrototypeCard;
@@ -24,8 +28,21 @@ public class Main {
 		//probarSinglenton();
 		
 		//COMPORTAMIENTO
-		probarChainOfResponsabality();
+		//probarChainOfResponsabality();
+		probarCommand();
 		
+	}
+	
+	private static void probarCommand() {
+		CreditCard creditCard = new CreditCard();
+		CreditCard creditCardDeactive = new CreditCard();
+		
+		CreditCardInvoker invoker  = new CreditCardInvoker();
+		invoker.setCommand(new CreditCardActivateCommand(creditCard));
+		invoker.run();
+		System.out.println("------------------------------");
+		invoker.setCommand(new CreditCardDesactivateCommand(creditCardDeactive));
+		invoker.run();
 	}
 	
 	private static void probarChainOfResponsabality() {
