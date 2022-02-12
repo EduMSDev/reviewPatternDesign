@@ -6,6 +6,9 @@ import creational.factorymethod.Payment;
 import creational.factorymethod.PaymentFactory;
 import creational.factorymethod.TypePayment;
 import static creational.prototype.PrototypeFactory.CarType.VISA;
+
+import behavioral.chainofresponsibility.Tarjeta;
+
 import static creational.prototype.PrototypeFactory.CarType.AMEX;
 import creational.prototype.PrototypeCard;
 import creational.prototype.PrototypeFactory;
@@ -13,12 +16,24 @@ import creational.prototype.PrototypeFactory;
 
 public class Main {
 	public static void main(String[] args) {
+		//CREACIONALES
 		//testingAsbtractFactoryMethod();
 		//probarAbstractFactory();
 		//probarBuilder();
 		//probarPrototype();
-		probarSinglenton();
+		//probarSinglenton();
 		
+		//COMPORTAMIENTO
+		probarChainOfResponsabality();
+		
+	}
+	
+	private static void probarChainOfResponsabality() {
+		
+		/*Use the Chain of Responsibility pattern when your program must process different types of requests in various ways, 
+		but the exact types of requests and their sequences are not known in advance.*/
+		Tarjeta tarjeta = new Tarjeta();
+		tarjeta.creditCardRequest(1000);
 	}
 	
 	private static void probarSinglenton () {
