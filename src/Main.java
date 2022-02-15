@@ -12,6 +12,12 @@ import behavioral.command.CreditCard;
 import behavioral.command.CreditCardActivateCommand;
 import behavioral.command.CreditCardDesactivateCommand;
 import behavioral.command.CreditCardInvoker;
+import behavioral.iterator.CardList;
+import behavioral.iterator.Iterator;
+import behavioral.iterator.List;
+import behavioral.mediator.ConcreteColleage;
+import behavioral.mediator.ConcreteColleage2;
+import behavioral.mediator.ConcreteMediator;
 
 import static creational.prototype.PrototypeFactory.CarType.AMEX;
 import creational.prototype.PrototypeCard;
@@ -29,8 +35,38 @@ public class Main {
 		
 		//COMPORTAMIENTO
 		//probarChainOfResponsabality();
-		probarCommand();
+		//probarCommand();
+		//probarIterator(); 
+		probarMediator();
+	}
+	
+	private static void probarMediator() {
+		ConcreteMediator mediator = new ConcreteMediator();
+		ConcreteColleage  user1 = new ConcreteColleage(mediator);
+		ConcreteColleage2  user2 = new ConcreteColleage2(mediator);
 		
+		mediator.setUser1(user1);
+		mediator.setUser2(user2);
+		user1.send("Hola soy user1");
+		user2.send("Hola soy user2");
+		
+	}
+	
+	private static void probarIterator() {
+		behavioral.iterator.Card[] cards = new behavioral.iterator.Card[5]; 
+		cards[0] =  new behavioral.iterator.Card("visa");
+		cards[1] =  new behavioral.iterator.Card("amex");
+		cards[2] =  new behavioral.iterator.Card("mastercard");
+		cards[3] =  new behavioral.iterator.Card("google card");
+		cards[4] =  new behavioral.iterator.Card("apple card");
+		
+		List lista = new CardList(cards);
+		Iterator iterator = lista.iterator();
+		
+		while (iterator.hasNext()) {
+			behavioral.iterator.Card tarjeta = (behavioral.iterator.Card) iterator.next();
+			System.out.println(tarjeta.getType());
+		}
 	}
 	
 	private static void probarCommand() {
