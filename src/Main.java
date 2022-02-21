@@ -21,6 +21,10 @@ import behavioral.mediator.ConcreteMediator;
 import behavioral.memento.Article;
 import behavioral.memento.ArticleMemento;
 import behavioral.memento.Carataker;
+import behavioral.observer.Coche;
+import behavioral.observer.MessagePublisher;
+import behavioral.observer.Peaton;
+import behavioral.observer.Semaforo;
 
 import static creational.prototype.PrototypeFactory.CarType.AMEX;
 import creational.prototype.PrototypeCard;
@@ -41,7 +45,27 @@ public class Main {
 		//probarCommand();
 		//probarIterator(); 
 		//probarMediator();
-		probarMemento();
+		//probarMemento();
+		probarObserver();
+		
+	}
+	
+	private static void probarObserver() {
+		Coche coche = new Coche();
+		Peaton peaton = new Peaton();
+		
+		MessagePublisher  message = new MessagePublisher();
+		
+		message.attach(coche);
+		message.attach(peaton);
+		message.notifyUpdate(new Semaforo("ROJO_COCHE"));
+		
+		try {
+			Thread.sleep(2000);
+		}catch (Exception e) {
+
+		}
+		message.notifyUpdate(new Semaforo("VERDE_COCHE"));
 		
 	}
 	
