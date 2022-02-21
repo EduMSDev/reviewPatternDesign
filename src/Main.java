@@ -18,6 +18,9 @@ import behavioral.iterator.List;
 import behavioral.mediator.ConcreteColleage;
 import behavioral.mediator.ConcreteColleage2;
 import behavioral.mediator.ConcreteMediator;
+import behavioral.memento.Article;
+import behavioral.memento.ArticleMemento;
+import behavioral.memento.Carataker;
 
 import static creational.prototype.PrototypeFactory.CarType.AMEX;
 import creational.prototype.PrototypeCard;
@@ -37,7 +40,36 @@ public class Main {
 		//probarChainOfResponsabality();
 		//probarCommand();
 		//probarIterator(); 
-		probarMediator();
+		//probarMediator();
+		probarMemento();
+		
+	}
+	
+	private static void probarMemento() {
+		Carataker carataker = new Carataker();
+		Article article = new Article("Alberto", "Memento es una pelicula");
+		article.setText(article.getText()+" de Nolan");
+		System.out.println(article.getText());
+		
+		carataker.addMemento(article.createMemento());
+		article.setText(article.getText() + " protagonizada por Leo");
+		System.out.println(article.getText());
+		
+		carataker.addMemento(article.createMemento());
+		
+		article.setText(article.getText() + "y leonardo di caprio");
+		System.out.println(article.getText());
+		
+		ArticleMemento memento1 = carataker.getMemento(0);
+		ArticleMemento memento2 = carataker.getMemento(1);
+		
+		article.restoreMemento(memento1);
+		System.out.println(article.getText());
+		
+		article.restoreMemento(memento2);
+		System.out.println(article.getText());
+		
+		
 	}
 	
 	private static void probarMediator() {
