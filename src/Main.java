@@ -12,6 +12,10 @@ import behavioral.command.CreditCard;
 import behavioral.command.CreditCardActivateCommand;
 import behavioral.command.CreditCardDesactivateCommand;
 import behavioral.command.CreditCardInvoker;
+import behavioral.interpreter.AndExpression;
+import behavioral.interpreter.Expression;
+import behavioral.interpreter.OrExpression;
+import behavioral.interpreter.TerminalExpression;
 import behavioral.iterator.CardList;
 import behavioral.iterator.Iterator;
 import behavioral.iterator.List;
@@ -25,6 +29,9 @@ import behavioral.observer.Coche;
 import behavioral.observer.MessagePublisher;
 import behavioral.observer.Peaton;
 import behavioral.observer.Semaforo;
+import behavioral.status.MobileAlertStateContext;
+import behavioral.status.Silent;
+import behavioral.status.Vibration;
 
 import static creational.prototype.PrototypeFactory.CarType.AMEX;
 import creational.prototype.PrototypeCard;
@@ -46,8 +53,33 @@ public class Main {
 		//probarIterator(); 
 		//probarMediator();
 		//probarMemento();
-		probarObserver();
+		//probarObserver();
+		//probarState();
+		probarInterpreter();
 		
+	}
+	
+	private static void probarInterpreter() {
+		Expression cero = new TerminalExpression("0");
+		Expression uno = new TerminalExpression("1");
+		
+		Expression containBoolean = new OrExpression(cero, uno);
+		Expression containsOneAndCero=  new AndExpression(cero, uno);
+		
+		System.out.println(containBoolean.interpret("cero"));
+		System.out.println(containBoolean.interpret("0"));
+		
+		System.out.println(containsOneAndCero.interpret("0"));
+		System.out.println(containsOneAndCero.interpret("0, 1"));
+	}
+	
+	private static void probarState() {
+		MobileAlertStateContext context = new MobileAlertStateContext();
+		context.alert();
+		context.setState(new Vibration());
+		context.alert();
+		context.setState(new Silent());
+		context.alert();
 	}
 	
 	private static void probarObserver() {
