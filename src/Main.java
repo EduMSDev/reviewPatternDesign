@@ -7,6 +7,8 @@ import creational.factorymethod.PaymentFactory;
 import creational.factorymethod.TypePayment;
 import static creational.prototype.PrototypeFactory.CarType.VISA;
 
+import javax.swing.text.html.parser.ContentModel;
+
 import behavioral.chainofresponsibility.Tarjeta;
 import behavioral.command.CreditCard;
 import behavioral.command.CreditCardActivateCommand;
@@ -32,6 +34,16 @@ import behavioral.observer.Semaforo;
 import behavioral.status.MobileAlertStateContext;
 import behavioral.status.Silent;
 import behavioral.status.Vibration;
+import behavioral.strategy.CapitalStrategyTestFomartter;
+import behavioral.strategy.Context;
+import behavioral.strategy.LowerStrategyTestFomartter;
+import behavioral.templateMethod.AppleCard;
+import behavioral.templateMethod.Paypal;
+import behavioral.visitor.BlackClassicCreditCardVisitor;
+import behavioral.visitor.ClassicCreditCardVisitor;
+import behavioral.visitor.OfertaElement;
+import behavioral.visitor.OfertaGasolina;
+import behavioral.visitor.OfertaVuelos;
 
 import static creational.prototype.PrototypeFactory.CarType.AMEX;
 import creational.prototype.PrototypeCard;
@@ -55,8 +67,35 @@ public class Main {
 		//probarMemento();
 		//probarObserver();
 		//probarState();
-		probarInterpreter();
+		//probarInterpreter();
+		//probarStrategyText();
+		//probarTemplate();
+		probarVisitor();
 		
+	}
+	
+	private static void probarVisitor() {
+		OfertaElement ofertaElement = new OfertaGasolina();
+		ofertaElement.accept(new BlackClassicCreditCardVisitor());
+		
+		ofertaElement = new OfertaVuelos();
+		ofertaElement.accept(new ClassicCreditCardVisitor());
+	}
+	
+	private static void probarTemplate() {
+		behavioral.templateMethod.Payment payment = new AppleCard();
+		payment.makePayment();
+		
+		payment = new Paypal();
+		payment.makePayment();
+	}
+	
+	private static void probarStrategyText() {
+		Context context = new Context(new CapitalStrategyTestFomartter());
+		context.publishText("Se ha convertido en mayusculas.");
+		
+		context = new Context(new LowerStrategyTestFomartter());
+		context.publishText("Esto sera para las minusculas.");
 	}
 	
 	private static void probarInterpreter() {
