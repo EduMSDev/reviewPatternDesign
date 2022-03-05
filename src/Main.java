@@ -70,8 +70,16 @@ public class Main {
 		//probarInterpreter();
 		//probarStrategyText();
 		//probarTemplate();
-		probarVisitor();
-		
+		//probarVisitor();
+		probarAdapter();
+	}
+
+	private static void probarAdapter(){
+		behavioral.Adapter.CreditCard creditCard = new behavioral.Adapter.CreditCard();
+		creditCard.pay("classic");
+		creditCard.pay("gold");
+		creditCard.pay("black");
+		creditCard.pay("silver");
 	}
 	
 	private static void probarVisitor() {
