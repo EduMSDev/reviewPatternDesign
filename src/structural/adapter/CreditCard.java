@@ -1,5 +1,5 @@
 
-package behavioral.adapter;
+package structural.adapter;
 
 public class CreditCard implements Payment {
 

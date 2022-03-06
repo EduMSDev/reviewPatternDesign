@@ -1,4 +1,4 @@
-package behavioral.adapter;
+package structural.adapter;
 
 public class Adapter implements Payment {
 

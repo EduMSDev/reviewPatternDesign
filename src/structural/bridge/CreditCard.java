@@ -1,4 +1,4 @@
-package behavioral.bridge;
+package structural.bridge;
 
 public abstract class CreditCard {
     protected ICreditCard tarjeta;

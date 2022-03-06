@@ -1,6 +1,6 @@
-import behavioral.bridge.ClassicCreditCard;
-import behavioral.bridge.SecureCreditCard;
-import behavioral.bridge.UnsecureCreditCard;
+import structural.bridge.ClassicCreditCard;
+import structural.bridge.SecureCreditCard;
+import structural.bridge.UnsecureCreditCard;
 import creational.abstractfactory.AbstractFactory;
 import creational.abstractfactory.Card;
 import creational.abstractfactory.FactoryProvider;
@@ -49,6 +49,10 @@ import behavioral.visitor.OfertaVuelos;
 import static creational.prototype.PrototypeFactory.CarType.AMEX;
 import creational.prototype.PrototypeCard;
 import creational.prototype.PrototypeFactory;
+import structural.composite.CuentaAhorro;
+import structural.composite.CuentaComponent;
+import structural.composite.CuentaCorriente;
+import structural.composite.CuenteComposite;
 
 
 public class Main {
@@ -73,18 +77,31 @@ public class Main {
 		//probarTemplate();
 		//probarVisitor();
 		//probarAdapter();
-		probarBridge();
+		//probarBridge();
+		probarComposite();
+	}
+
+
+	private static void probarComposite(){
+		CuentaComponent cuentaCorriente = new CuentaCorriente(1000, "Alberto");
+		CuentaComponent cuentaAhorro = new CuentaAhorro(1000, "jose");
+		CuenteComposite cuenteComposite = new CuenteComposite();
+		cuenteComposite.addCuenta(cuentaAhorro);
+		cuenteComposite.addCuenta(cuentaCorriente);
+
+		cuenteComposite.showAccountName();
+		cuenteComposite.getAmount();
 	}
 
 	private static void probarBridge(){
-		behavioral.bridge.CreditCard classic = new ClassicCreditCard(new SecureCreditCard());
+		structural.bridge.CreditCard classic = new ClassicCreditCard(new SecureCreditCard());
 		classic.realizarPago();
 		classic = new ClassicCreditCard(new UnsecureCreditCard());
 		classic.realizarPago();
 	}
 
 	private static void probarAdapter(){
-		behavioral.adapter.CreditCard creditCard = new behavioral.adapter.CreditCard();
+		structural.adapter.CreditCard creditCard = new structural.adapter.CreditCard();
 		creditCard.pay("classic");
 		creditCard.pay("gold");
 		creditCard.pay("black");
