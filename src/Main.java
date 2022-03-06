@@ -54,6 +54,7 @@ import structural.composite.CuentaComponent;
 import structural.composite.CuentaCorriente;
 import structural.composite.CuenteComposite;
 import structural.decorator.*;
+import structural.facade.CreditMarket;
 
 
 public class Main {
@@ -82,9 +83,16 @@ public class Main {
 		//probarAdapter();
 		//probarBridge();
 		//probarComposite();
-		probarDecorator();
+		//probarDecorator();
+		probarFacade();
 	}
 
+	private static void probarFacade(){
+		CreditMarket creditMarket = new CreditMarket();
+		creditMarket.showCreditGold();
+		creditMarket.showCreditBlack();
+		creditMarket.showCreditSilver();
+	}
 
 	private static void probarDecorator(){
 		Credit gold = new Gold();
