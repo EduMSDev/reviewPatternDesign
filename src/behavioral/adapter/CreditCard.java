@@ -1,5 +1,5 @@
 
-package behavioral.Adapter;
+package behavioral.adapter;
 
 public class CreditCard implements Payment {
 

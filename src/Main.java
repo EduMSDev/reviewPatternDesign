@@ -1,3 +1,6 @@
+import behavioral.bridge.ClassicCreditCard;
+import behavioral.bridge.SecureCreditCard;
+import behavioral.bridge.UnsecureCreditCard;
 import creational.abstractfactory.AbstractFactory;
 import creational.abstractfactory.Card;
 import creational.abstractfactory.FactoryProvider;
@@ -6,8 +9,6 @@ import creational.factorymethod.Payment;
 import creational.factorymethod.PaymentFactory;
 import creational.factorymethod.TypePayment;
 import static creational.prototype.PrototypeFactory.CarType.VISA;
-
-import javax.swing.text.html.parser.ContentModel;
 
 import behavioral.chainofresponsibility.Tarjeta;
 import behavioral.command.CreditCard;
@@ -71,11 +72,19 @@ public class Main {
 		//probarStrategyText();
 		//probarTemplate();
 		//probarVisitor();
-		probarAdapter();
+		//probarAdapter();
+		probarBridge();
+	}
+
+	private static void probarBridge(){
+		behavioral.bridge.CreditCard classic = new ClassicCreditCard(new SecureCreditCard());
+		classic.realizarPago();
+		classic = new ClassicCreditCard(new UnsecureCreditCard());
+		classic.realizarPago();
 	}
 
 	private static void probarAdapter(){
-		behavioral.Adapter.CreditCard creditCard = new behavioral.Adapter.CreditCard();
+		behavioral.adapter.CreditCard creditCard = new behavioral.adapter.CreditCard();
 		creditCard.pay("classic");
 		creditCard.pay("gold");
 		creditCard.pay("black");

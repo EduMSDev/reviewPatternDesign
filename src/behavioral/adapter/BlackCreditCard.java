@@ -1,4 +1,4 @@
-package behavioral.Adapter;
+package behavioral.adapter;
 
 public class BlackCreditCard implements Secure{
     @Override
