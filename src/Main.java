@@ -53,6 +53,7 @@ import structural.composite.CuentaAhorro;
 import structural.composite.CuentaComponent;
 import structural.composite.CuentaCorriente;
 import structural.composite.CuenteComposite;
+import structural.decorator.*;
 
 
 public class Main {
@@ -63,11 +64,11 @@ public class Main {
 		//probarBuilder();
 		//probarPrototype();
 		//probarSinglenton();
-		
+
 		//COMPORTAMIENTO
 		//probarChainOfResponsabality();
 		//probarCommand();
-		//probarIterator(); 
+		//probarIterator();
 		//probarMediator();
 		//probarMemento();
 		//probarObserver();
@@ -76,11 +77,28 @@ public class Main {
 		//probarStrategyText();
 		//probarTemplate();
 		//probarVisitor();
+
+		//ESTRUCTURAL
 		//probarAdapter();
 		//probarBridge();
-		probarComposite();
+		//probarComposite();
+		probarDecorator();
 	}
 
+
+	private static void probarDecorator(){
+		Credit gold = new Gold();
+		Credit black = new Black();
+		black = new InternationalPaymentDecorator(black);
+
+		Credit goldSecure = new Gold();
+		gold = new InternationalPaymentDecorator(gold);
+		gold = new SecureDecorator(goldSecure);
+
+		gold.showCredit();
+		black.showCredit();
+		goldSecure.showCredit();
+	}
 
 	private static void probarComposite(){
 		CuentaComponent cuentaCorriente = new CuentaCorriente(1000, "Alberto");
